@@ -1,3 +1,22 @@
+import { FeaturePropTypes } from "./propTypes";
+
+/**
+ * @typedef FeatureImage
+ * @type {object}
+ * @property {string} src
+ * @property {string} alt
+ */
+
+/**
+ * Show feature, containing a title, text and image as logo
+ * 
+ * @param {object} props
+ * @param {string} props.title 
+ * @param {string} props.text 
+ * @param {FeatureImage} props.image
+ * @returns {JSX.Element}
+ */
+
 const Feature = ({ title, text, image }) => {
   const { src, alt } = image;
   return (
@@ -12,5 +31,7 @@ const Feature = ({ title, text, image }) => {
     </div>
   );
 };
+
+Feature.propTypes = FeaturePropTypes;
 
 export default Feature;

@@ -1,5 +1,14 @@
 import React from 'react';
 import Feature from "./Feature/Feature";
+import { FeaturesPropTypes } from "./propTypes";
+
+/**
+ * Show features for Home page
+ * 
+ * @param {object} props
+ * @param {Array<object>} props.features  
+ * @returns {JSX.Element}
+ */
 
 const Features = ({ features }) => {
   return (
@@ -11,5 +20,7 @@ const Features = ({ features }) => {
     </section>
   );
 };
+
+Features.propTypes = FeaturesPropTypes;
 
 export default Features;

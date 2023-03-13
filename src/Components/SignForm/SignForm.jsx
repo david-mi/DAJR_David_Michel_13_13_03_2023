@@ -1,13 +1,37 @@
-const SignForm = () => {
+import { useRef } from "react";
+
+const SignForm = ({ handler }) => {
+  const usernameInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+
+  function submitForm(event) {
+    event.preventDefault();
+
+    const formBody = {
+      email: usernameInputRef.current.value,
+      password: passwordInputRef.current.value
+    };
+
+    handler(formBody);
+  }
+
   return (
-    <form>
+    <form onSubmit={submitForm}>
       <div className="input-wrapper">
         <label htmlFor="username">Username</label>
-        <input type="text" id="username" />
+        <input
+          type="text"
+          id="username"
+          ref={usernameInputRef}
+        />
       </div>
       <div className="input-wrapper">
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" />
+        <input
+          type="password"
+          id="password"
+          ref={passwordInputRef}
+        />
       </div>
       <div className="input-remember">
         <input type="checkbox" id="remember-me" />

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authMiddleware } from "../middlewares/auth";
+import { authMiddleware } from "../middlewares";
 
 export const userStatus = {
   CONNECTED: "connected",

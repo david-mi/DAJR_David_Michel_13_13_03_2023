@@ -13,6 +13,15 @@ class User {
     return await response.json();
   }
 
+  #getStorageToken() {
+    const token = localStorage.getItem("token");
+    if (token === null) {
+      throw new Error("Missing token");
+    }
+
+    return token;
+  }
+
   async login(payload) {
     const options = {
       method: "POST",
@@ -21,8 +30,19 @@ class User {
       },
       body: JSON.stringify(payload)
     };
-    const data = await this.#fetchOrThrow("/login", options);
+    const data = await this.#fetchOrThrow("login", options);
     return userModeling.auth(data);
+  }
+
+  async getProfile() {
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${this.#getStorageToken()}`
+      },
+    };
+    const data = await this.#fetchOrThrow("profile", options);
+    return userModeling.profile(data);
   }
 }
 

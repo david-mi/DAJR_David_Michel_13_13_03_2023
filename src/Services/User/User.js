@@ -1,3 +1,5 @@
+import { userModeling } from "./Modeling";
+
 class User {
   #API_USER_URL = `${process.env.REACT_APP_API_BASE_URL}/user`;
 
@@ -19,9 +21,8 @@ class User {
       },
       body: JSON.stringify(payload)
     };
-
-    const { body } = await this.#fetchOrThrow("/login", options);
-    return body;
+    const data = await this.#fetchOrThrow("/login", options);
+    return userModeling.auth(data);
   }
 }
 

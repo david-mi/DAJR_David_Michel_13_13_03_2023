@@ -1,7 +1,7 @@
 import './styles/main.css';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import Routes from "./Routes";
+import Routes from "./Routes/Routes";
 import { Footer, Nav } from "./Components";
 import store from "./store";
 

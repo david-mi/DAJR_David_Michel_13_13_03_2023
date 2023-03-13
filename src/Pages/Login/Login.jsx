@@ -1,25 +1,19 @@
 
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SignForm } from "../../Components";
 import { authMiddleware } from "../../middlewares/auth";
-import { userStatus } from "../../reducers/auth";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const status = useSelector(((store) => store.auth.status));
   const navigate = useNavigate();
 
-  function handler(data) {
-    dispatch(authMiddleware(data));
-  }
-
-  useEffect(() => {
-    if (status === userStatus.CONNECTED) {
+  async function handler(data) {
+    const { meta } = await dispatch(authMiddleware(data));
+    if (meta.requestStatus === "fulfilled") {
       navigate("/profile");
     }
-  }, [status]);
+  }
 
   return (
     <main className="main bg-dark">

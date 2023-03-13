@@ -9,6 +9,13 @@ class UserModeling {
     const { createdAt, updatedAt, id, ...userInfos } = data.body;
     return userInfos;
   }
+
+  editProfile({ body }) {
+    return {
+      firstName: body.firstName || "",
+      lastName: body.lastName || ""
+    };
+  }
 }
 
 export const userModeling = new UserModeling()

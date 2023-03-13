@@ -44,6 +44,19 @@ class User {
     const data = await this.#fetchOrThrow("profile", options);
     return userModeling.profile(data);
   }
+
+  async editProfile(payload) {
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.#getStorageToken()}`
+      },
+      body: JSON.stringify(payload)
+    };
+    const data = await this.#fetchOrThrow("profile", options);
+    return userModeling.editProfile(data);
+  }
 }
 
 export const userService = new User();

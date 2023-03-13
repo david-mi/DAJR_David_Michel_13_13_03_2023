@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { profileMiddleware } from "../middlewares";
 
 export const profileStatus = {
-  RETRIEVED: "retrieved",
+  IDLE: "idle",
   ERROR: "error",
   PENDING: "pending"
 };
@@ -11,7 +11,7 @@ const initialState = {
   firstName: "",
   lastName: "",
   email: "",
-  status: profileStatus.PENDING
+  getStatus: profileStatus.PENDING,
 };
 
 export const profileSlice = createSlice({
@@ -19,18 +19,18 @@ export const profileSlice = createSlice({
   initialState,
   extraReducers: (profiler) => {
     profiler.addCase(profileMiddleware.pending, (state, action) => {
-      state.status = profileStatus.PENDING;
+      state.getStatus = profileStatus.PENDING;
     });
     profiler.addCase(profileMiddleware.fulfilled, (state, { payload }) => {
       return {
         ...payload,
-        status: profileStatus.RETRIEVED
+        getStatus: profileStatus.IDLE
       };
     });
     profiler.addCase(profileMiddleware.rejected, (state, action) => {
       return {
         ...initialState,
-        status: profileStatus.ERROR
+        getStatus: profileStatus.ERROR
       };
     });
   }

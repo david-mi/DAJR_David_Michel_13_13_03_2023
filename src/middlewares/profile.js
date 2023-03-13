@@ -12,3 +12,7 @@ export const profileMiddleware = createAsyncThunk("user/profile/get", async (_, 
     return Promise.reject("erreur");
   }
 });
+
+export const editProfileMiddleware = createAsyncThunk("user/profile/edit", async (payload) => {
+  return await userService.editProfile({ ...payload });
+});

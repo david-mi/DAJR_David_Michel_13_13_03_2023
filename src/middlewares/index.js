@@ -1,2 +1,2 @@
 export { authMiddleware } from "./auth";
-export { profileMiddleware } from "./profile";
+export { profileMiddleware, editProfileMiddleware } from "./profile";

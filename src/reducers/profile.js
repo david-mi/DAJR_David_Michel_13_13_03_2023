@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { profileMiddleware } from "../middlewares";
+import { profileMiddleware, editProfileMiddleware } from "../middlewares";
 
 export const profileStatus = {
   IDLE: "idle",
@@ -12,6 +12,7 @@ const initialState = {
   lastName: "",
   email: "",
   getStatus: profileStatus.PENDING,
+  editStatus: profileStatus.IDLE
 };
 
 export const profileSlice = createSlice({
@@ -32,6 +33,18 @@ export const profileSlice = createSlice({
         ...initialState,
         getStatus: profileStatus.ERROR
       };
+    });
+    profiler.addCase(editProfileMiddleware.pending, (state, action) => {
+      state.editStatus = profileStatus.PENDING;
+    });
+    profiler.addCase(editProfileMiddleware.fulfilled, (state, { payload }) => {
+      return {
+        ...payload,
+        editStatus: profileStatus.IDLE
+      };
+    });
+    profiler.addCase(editProfileMiddleware.rejected, (state, action) => {
+      state.editStatus = profileStatus.ERROR;
     });
   }
 });

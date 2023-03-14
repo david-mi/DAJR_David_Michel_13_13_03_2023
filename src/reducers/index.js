@@ -1,2 +1,2 @@
-export { authSlice } from "./auth";
-export { profileSlice } from "./profile";
+export { resetAuth, authReducer } from "./auth";
+export { resetProfile, profileReducer } from "./profile";

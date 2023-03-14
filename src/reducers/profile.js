@@ -15,9 +15,14 @@ const initialState = {
   editStatus: profileStatus.IDLE
 };
 
-export const profileSlice = createSlice({
+const profileSlice = createSlice({
   name: "profile",
   initialState,
+  reducers: {
+    reset() {
+      return initialState;
+    }
+  },
   extraReducers: (profiler) => {
     profiler.addCase(getProfileMiddleware.pending, (state, action) => {
       state.getStatus = profileStatus.PENDING;
@@ -48,3 +53,6 @@ export const profileSlice = createSlice({
     });
   }
 });
+
+export const profileReducer = profileSlice.reducer;
+export const resetProfile = profileSlice.actions.reset;

@@ -12,9 +12,14 @@ const initialState = {
   token: null
 };
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    reset() {
+      return initialState;
+    }
+  },
   extraReducers: (profiler) => {
     profiler.addCase(authMiddleware.pending, (state, action) => {
       state.status = userStatus.PENDING;
@@ -28,3 +33,6 @@ export const authSlice = createSlice({
     });
   }
 });
+
+export const authReducer = authSlice.reducer;
+export const resetAuth = authSlice.actions.reset;

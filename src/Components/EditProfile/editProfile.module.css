@@ -1,0 +1,69 @@
+.form {
+  background-color: #dfe6ed;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    "firstName lastName"
+    "save cancel"
+  ;
+  gap: 20px 25px;
+  padding-block: 40px 55px;
+  width: 80%;
+  margin: auto;
+  position: relative;
+}
+
+.form * {
+  border-radius: 5px;
+}
+
+.form input {
+  border: solid 3px #b8c4ce;
+  font-size: 1.5rem;
+  width: 300px;
+  height: 64px;
+  padding-inline: 20px;
+}
+
+.form input:focus {
+  outline-color: #675bf5;
+}
+
+.firstName,
+.save {
+  justify-self: flex-end;
+}
+
+.form input::placeholder {
+  color: #c3cfd9;
+}
+
+.form button {
+  background-color: white;
+  height: 52px;
+  width: 180px;
+  border: solid 3px #b3b3f0;
+  color: #675bf5;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.form button:hover {
+  background-color: #675bf5;
+  color: white;
+}
+
+
+.error {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: red;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}

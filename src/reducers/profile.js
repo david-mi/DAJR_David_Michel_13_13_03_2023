@@ -43,10 +43,8 @@ const profileSlice = createSlice({
       state.editStatus = profileStatus.PENDING;
     });
     profiler.addCase(editProfileMiddleware.fulfilled, (state, { payload }) => {
-      return {
-        ...payload,
-        editStatus: profileStatus.IDLE
-      };
+      state.firstName = payload.firstName;
+      state.lastName = payload.lastName;
     });
     profiler.addCase(editProfileMiddleware.rejected, (state, action) => {
       state.editStatus = profileStatus.ERROR;

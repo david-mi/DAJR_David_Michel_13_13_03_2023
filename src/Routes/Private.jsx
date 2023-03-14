@@ -1,17 +1,23 @@
-import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { userStatus } from "../reducers/auth";
-import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { profileStatus } from "../reducers/profile";
+import { getProfileMiddleware } from "../middlewares";
 
 const PrivateRoutes = () => {
-  const status = useSelector(((store) => store.auth.status));
+  const status = useSelector(((store) => store.profile.getStatus));
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProfileMiddleware());
+  }, []);
 
   switch (status) {
-    case userStatus.PENDING:
+    case profileStatus.PENDING:
       return <h1>Chargement...</h1>;
-    case userStatus.DISCONNECTED:
+    case profileStatus.ERROR:
       return <Navigate to="/sign-in" />;
-    case userStatus.CONNECTED:
+    case profileStatus.IDLE:
       return <Outlet />;
   }
 };

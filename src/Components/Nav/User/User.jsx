@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 
-const User = ({ firstName }) => {
+const User = ({ firstName, signout }) => {
   return (
     <div>
       <Link className="main-nav-item" to="/">
         <i className="fa fa-user-circle"></i>
         {firstName}
       </Link>
-      <Link className="main-nav-item" to="/">
+      <Link onClick={signout}
+        className="main-nav-item"
+        to="/"
+      >
         <i className="fa fa-sign-out"></i>
         Sign Out
       </Link>

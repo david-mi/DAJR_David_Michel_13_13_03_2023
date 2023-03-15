@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { fetchStatus } from "../reducers";
 
 const PrivateRoutes = () => {

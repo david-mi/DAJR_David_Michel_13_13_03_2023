@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux";
-import { fetchStatus } from "../../reducers/profile";
 import { Logo, User, Guest } from "./index";
 import { disconnectMiddleware } from "../../middlewares/reset";
 

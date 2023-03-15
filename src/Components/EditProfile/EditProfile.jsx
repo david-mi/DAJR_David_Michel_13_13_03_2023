@@ -6,6 +6,13 @@ const EditProfile = ({ firstName, lastName, closeForm, submitHandler }) => {
   const lastNameRef = useRef(null);
   const formRef = useRef(null);
 
+  const namePattern = {
+    required: true,
+    type: "text",
+    pattern: "^[a-zA-ZÀ-ö]{1}[a-z-À-ö ]*[a-zA-ZÀ-ö]{1}$",
+    title: "Le prénom doit comporter au minimum 2 caractères, commencer et finir par une lettre"
+  };
+
   function submitForm(event) {
     event.preventDefault();
 
@@ -14,12 +21,9 @@ const EditProfile = ({ firstName, lastName, closeForm, submitHandler }) => {
       lastName: lastNameRef.current.value
     };
 
-    submitHandler(formBody);
-  }
-
-  function closeEditForm() {
-    formRef.current.reset();
-    closeForm();
+    if (formRef.current.reportValidity()) {
+      submitHandler(formBody);
+    }
   }
 
   return (
@@ -29,25 +33,23 @@ const EditProfile = ({ firstName, lastName, closeForm, submitHandler }) => {
       ref={formRef}
     >
       <input
-        type="text"
-        placeholder={firstName}
+        {...namePattern}
+        placeholder="Prénom"
         ref={firstNameRef}
         className={styles.firstName}
-        minLength={2}
-        required
+        defaultValue={firstName}
       />
       <input
-        type="text"
-        placeholder={lastName}
+        {...namePattern}
+        placeholder="Nom"
         ref={lastNameRef}
         className={styles.lastName}
-        minLength={2}
-        required
+        defaultValue={lastName}
       />
       <button className={styles.save}>Save</button>
       <button
         className={styles.cancel}
-        onClick={closeEditForm}
+        onClick={closeForm}
         type="button"
       >
         Cancel

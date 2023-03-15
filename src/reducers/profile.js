@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfileMiddleware, editProfileMiddleware } from "../middlewares";
+import { getProfileMiddleware, editProfileMiddleware, authMiddleware } from "../middlewares";
 
 export const profileStatus = {
   IDLE: "idle",
@@ -12,7 +12,8 @@ const initialState = {
   lastName: "",
   email: "",
   getStatus: profileStatus.PENDING,
-  editStatus: profileStatus.IDLE
+  editStatus: profileStatus.IDLE,
+  loginStatus: profileStatus.IDLE
 };
 
 const profileSlice = createSlice({
@@ -24,11 +25,21 @@ const profileSlice = createSlice({
     }
   },
   extraReducers: (profiler) => {
+    profiler.addCase(authMiddleware.pending, (state, action) => {
+      state.loginStatus = profileStatus.PENDING;
+    });
+    profiler.addCase(authMiddleware.fulfilled, (state, action) => {
+      state.loginStatus = profileStatus.IDLE;
+    });
+    profiler.addCase(authMiddleware.rejected, (state, action) => {
+      return { ...initialState };
+    });
     profiler.addCase(getProfileMiddleware.pending, (state, action) => {
       state.getStatus = profileStatus.PENDING;
     });
     profiler.addCase(getProfileMiddleware.fulfilled, (state, { payload }) => {
       return {
+        ...state,
         ...payload,
         getStatus: profileStatus.IDLE
       };

@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import { SignForm } from "../../Components";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { profileStatus } from "../../reducers/profile";
+import { fetchStatus } from "../../reducers/profile";
 import { authMiddleware } from "../../middlewares/auth";
 import { disconnectMiddleware } from "../../middlewares/reset";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const status = useSelector(state => state.profile.getStatus);
+  const status = useSelector(state => state.profile.get.status);
 
   async function handler(data) {
     const { meta } = await dispatch(authMiddleware(data));
@@ -21,7 +21,7 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (status === profileStatus.ERROR) {
+    if (status === fetchStatus.FAILED) {
       dispatch(disconnectMiddleware);
     }
   }, [status]);

@@ -1,30 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfileMiddleware, editProfileMiddleware, authMiddleware } from "../middlewares";
-
-export const fetchStatus = {
-  IDLE: "idle",
-  PENDING: "pending",
-  FAILED: "failed"
-};
-
-const initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  get: {
-    status: fetchStatus.IDLE,
-    error: null
-  },
-  edit: {
-    status: fetchStatus.IDLE,
-    error: null
-  },
-  login: {
-    status: fetchStatus.IDLE,
-    error: null
-  },
-  authenticated: false
-};
+import { getProfileMiddleware, editProfileMiddleware, authMiddleware } from "../../middlewares";
+import { initialState } from "./initialState";
+import { fetchStatus } from "../enums";
 
 const profileSlice = createSlice({
   name: "profile",

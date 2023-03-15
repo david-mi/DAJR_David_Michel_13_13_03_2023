@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchStatus } from "../reducers/profile";
-import { getProfileMiddleware } from "../middlewares";
-import { disconnectMiddleware } from "../middlewares/reset";
+import { fetchStatus } from "../reducers";
 
 const PrivateRoutes = () => {
   const status = useSelector((({ profile }) => profile.get.status));

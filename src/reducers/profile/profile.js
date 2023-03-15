@@ -31,9 +31,7 @@ const profileSlice = createSlice({
       return {
         ...state,
         ...payload,
-        get: {
-          status: fetchStatus.IDLE,
-        },
+        get: initialState.get,
         authenticated: true
       };
     });

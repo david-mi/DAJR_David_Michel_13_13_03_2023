@@ -1,5 +1,10 @@
+.form * {
+  box-sizing: border-box;
+}
+
 .form {
   background-color: #dfe6ed;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -8,7 +13,8 @@
     "save cancel"
   ;
   gap: 20px 25px;
-  padding-block: 40px 55px;
+  padding-block: clamp(20px, 3vw, 40px) clamp(25px, 4vw, 55px);
+  padding-inline: 1.5rem;
   width: 80%;
   margin: auto;
   position: relative;
@@ -21,13 +27,30 @@
 .form input {
   border: solid 3px #b8c4ce;
   font-size: 1.5rem;
-  width: 300px;
-  height: 64px;
+  max-width: 300px;
+  width: 100%;
+  height: clamp(55px, 6vw, 64px);
   padding-inline: 20px;
 }
 
 .form input:focus {
   outline-color: #675bf5;
+}
+
+.firstName {
+  grid-area: firstName;
+}
+
+.lastName {
+  grid-area: lastName;
+}
+
+.cancel {
+  grid-area: cancel;
+}
+
+.save {
+  grid-area: save;
 }
 
 .firstName,
@@ -41,8 +64,9 @@
 
 .form button {
   background-color: white;
-  height: 52px;
-  width: 180px;
+  height: clamp(45px, 6vw, 52px);
+  max-width: 180px;
+  width: 100%;
   border: solid 3px #b3b3f0;
   color: #675bf5;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -50,13 +74,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: 300ms;
+  height: clamp(55px, 6vw, 64px);
 }
 
 .form button:hover {
   background-color: #675bf5;
   color: white;
 }
-
 
 .error {
   font-size: 0.8rem;
@@ -66,4 +90,21 @@
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@media (max-width: 720px) {
+  .form {
+    justify-content: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+      "firstName"
+      "lastName"
+      "cancel"
+      "save";
+  }
+
+  .form * {
+    max-width: none !important;
+  }
 }

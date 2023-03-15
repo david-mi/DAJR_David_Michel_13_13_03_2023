@@ -4,10 +4,11 @@ import { Logo, User, Guest } from "./index";
 import { disconnectMiddleware } from "../../middlewares/reset";
 
 const Nav = ({ image, title }) => {
-  const { authenticated, firstName } = useSelector((store) => store.profile);
   const dispatch = useDispatch();
+  const authenticated = useSelector(({ profile }) => profile.authenticated);
+  const firstName = useSelector(({ profile }) => profile.firstName);
 
-  function handleSignout(event) {
+  function handleSignout() {
     dispatch(disconnectMiddleware);
   }
 

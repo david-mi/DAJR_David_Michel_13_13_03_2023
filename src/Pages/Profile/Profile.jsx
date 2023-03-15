@@ -6,9 +6,9 @@ import { editProfileMiddleware } from "../../middlewares";
 import EditProfile from "../../Components/EditProfile/EditProfile";
 
 const Profile = () => {
-  const { firstName, lastName } = useSelector((store) => store.profile);
   const dispatch = useDispatch();
-
+  const firstName = useSelector(({ profile }) => profile.firstName);
+  const lastName = useSelector(({ profile }) => profile.lastName);
   const [displayEditForm, setDisplayEditForm] = useState(false);
 
   function handleDisplayEditForm() {

@@ -6,7 +6,7 @@ import { getProfileMiddleware } from "../middlewares";
 import { disconnectMiddleware } from "../middlewares/reset";
 
 const PrivateRoutes = () => {
-  const status = useSelector(((store) => store.profile.get.status));
+  const status = useSelector((({ profile }) => profile.get.status));
 
   switch (status) {
     case fetchStatus.PENDING:

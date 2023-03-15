@@ -8,7 +8,7 @@ import { authMiddleware } from "../../middlewares/auth";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authenticated } = useSelector(state => state.profile);
+  const authenticated = useSelector(({ profile }) => profile.authenticated);
 
   async function handler(data) {
     dispatch(authMiddleware(data));

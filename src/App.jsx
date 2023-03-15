@@ -15,8 +15,8 @@ const navProps = {
 };
 
 const App = () => {
-  const { authenticated } = useSelector((store) => store.profile);
   const dispatch = useDispatch();
+  const authenticated = useSelector(({ profile }) => profile.authenticated);
 
   useEffect(() => {
     if (authenticated === false) {

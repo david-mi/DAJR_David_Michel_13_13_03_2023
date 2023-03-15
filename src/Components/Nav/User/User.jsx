@@ -9,7 +9,7 @@ const User = ({ firstName, signout }) => {
       </Link>
       <Link onClick={signout}
         className="main-nav-item"
-        to="/"
+        to="/sign-in"
       >
         <i className="fa fa-sign-out"></i>
         Sign Out

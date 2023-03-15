@@ -1,30 +1,24 @@
 
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { SignForm } from "../../Components";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchStatus } from "../../reducers/profile";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { SignForm } from "../../Components";
 import { authMiddleware } from "../../middlewares/auth";
-import { disconnectMiddleware } from "../../middlewares/reset";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const status = useSelector(state => state.profile.get.status);
+  const { authenticated } = useSelector(state => state.profile);
 
   async function handler(data) {
-    const { meta } = await dispatch(authMiddleware(data));
-    if (meta.requestStatus === "fulfilled") {
-      navigate("/profile");
-    }
+    dispatch(authMiddleware(data));
   }
 
   useEffect(() => {
-    if (status === fetchStatus.FAILED) {
-      dispatch(disconnectMiddleware);
+    if (authenticated) {
+      navigate("/profile");
     }
-  }, [status]);
+  }, [authenticated]);
 
   return (
     <main className="main bg-dark">

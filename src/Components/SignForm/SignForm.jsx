@@ -1,14 +1,14 @@
 import { useRef } from "react";
 
 const SignForm = ({ handler }) => {
-  const usernameInputRef = useRef(null);
+  const userNameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
   function submitForm(event) {
     event.preventDefault();
 
     const formBody = {
-      email: usernameInputRef.current.value,
+      email: userNameInputRef.current.value,
       password: passwordInputRef.current.value
     };
 
@@ -18,11 +18,11 @@ const SignForm = ({ handler }) => {
   return (
     <form onSubmit={submitForm}>
       <div className="input-wrapper">
-        <label htmlFor="username">Username</label>
+        <label htmlFor="userName">Username</label>
         <input
           type="text"
-          id="username"
-          ref={usernameInputRef}
+          id="userName"
+          ref={userNameInputRef}
         />
       </div>
       <div className="input-wrapper">

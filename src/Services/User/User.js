@@ -1,4 +1,5 @@
 import { userModeling } from "./Modeling";
+import { getStorageTokenOrThrow } from "../../utils";
 
 class User {
   #API_USER_URL = `${process.env.REACT_APP_API_BASE_URL}/user`;
@@ -13,15 +14,6 @@ class User {
     return await response.json();
   }
 
-  #getStorageToken() {
-    const token = localStorage.getItem("token");
-    if (token === null) {
-      throw new Error("Missing token");
-    }
-
-    return token;
-  }
-
   async login(payload) {
     const options = {
       method: "POST",
@@ -34,25 +26,25 @@ class User {
     return userModeling.auth(data);
   }
 
-  async getProfile() {
+  async getProfile(token) {
     const options = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${this.#getStorageToken()}`
+        Authorization: `Bearer ${token}`
       },
     };
     const data = await this.#fetchOrThrow("profile", options);
     return userModeling.profile(data);
   }
 
-  async editProfile(payload) {
+  async editProfile(payload, token) {
     const options = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.#getStorageToken()}`
+        Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload, token)
     };
     const data = await this.#fetchOrThrow("profile", options);
     return userModeling.editProfile(data);

@@ -10,7 +10,7 @@ export const authMiddleware = (payload) => async (dispatch) => {
     setStorageToken(token);
     dispatch(actions.loginFulfilled());
   } catch (error) {
-    dispatch(errorMiddleware(error, actions.loginRejected));
+    return dispatch(errorMiddleware(error, actions.loginRejected));
   }
 
   dispatch(getProfileMiddleware);

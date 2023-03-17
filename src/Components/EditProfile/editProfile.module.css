@@ -7,13 +7,14 @@
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr) auto;
   grid-template-areas:
     "firstName lastName"
     "save cancel"
+    "error error"
   ;
   gap: 20px 25px;
-  padding-block: clamp(20px, 3vw, 40px) clamp(25px, 4vw, 55px);
+  padding-block: clamp(20px, 3vw, 40px) clamp(5px, 2vw, 35px);
   padding-inline: 1.5rem;
   width: 80%;
   margin: auto;
@@ -83,25 +84,28 @@
 }
 
 .error {
+  grid-area: error;
   font-size: 0.8rem;
   font-weight: bold;
   color: red;
-  position: absolute;
-  bottom: 20px;
+  /* position: absolute; */
+  /* bottom: 20px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
+  text-align: center;
 }
 
 @media (max-width: 720px) {
   .form {
     justify-content: center;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr) auto;
     grid-template-areas:
       "firstName"
       "lastName"
       "cancel"
-      "save";
+      "save"
+      "error";
   }
 
   .form * {

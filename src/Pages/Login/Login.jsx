@@ -9,6 +9,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const authenticated = useSelector(({ profile }) => profile.authenticated);
+  const loginError = useSelector(({ profile }) => profile.login.error);
 
   async function loginFormHandler(data) {
     dispatch(authMiddleware(data));
@@ -25,7 +26,7 @@ const Login = () => {
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <AuthForm submitHandler={loginFormHandler} />
+        <AuthForm submitHandler={loginFormHandler} error={loginError} />
       </section>
     </main>
   );

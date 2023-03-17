@@ -1,10 +1,14 @@
 import styles from "./editProfile.module.css";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 
-const EditProfile = ({ firstName, lastName, closeForm, submitHandler }) => {
+const EditProfile = (props) => {
+  const { firstName, lastName, closeForm, submitHandler } = props;
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const formRef = useRef(null);
+
+  const editProfileError = useSelector(({ profile }) => profile.edit.error);
 
   const namePattern = {
     required: true,
@@ -54,7 +58,7 @@ const EditProfile = ({ firstName, lastName, closeForm, submitHandler }) => {
       >
         Cancel
       </button>
-      <small className={styles.error}></small>
+      {editProfileError && <small className={styles.error}>{editProfileError}</small>}
     </form>
   );
 };

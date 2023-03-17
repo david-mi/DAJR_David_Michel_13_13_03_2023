@@ -1,6 +1,7 @@
 import { useRef } from "react";
+import styles from "./authForm.module.css";
 
-const AuthForm = ({ submitHandler }) => {
+const AuthForm = ({ submitHandler, error }) => {
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const formRef = useRef(null);
@@ -49,6 +50,7 @@ const AuthForm = ({ submitHandler }) => {
         <label htmlFor="remember-me">Remember me</label>
       </div>
       <button className="sign-in-button">Sign In</button>
+      {error && <small className={styles.error}>{error}</small>}
     </form>
   );
 };

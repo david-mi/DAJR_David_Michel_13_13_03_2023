@@ -1,28 +1,36 @@
 import { useRef } from "react";
 
 const AuthForm = ({ submitHandler }) => {
-  const userNameInputRef = useRef(null);
+  const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
+  const formRef = useRef(null);
 
   function submitForm(event) {
     event.preventDefault();
 
     const formBody = {
-      email: userNameInputRef.current.value,
+      email: emailInputRef.current.value,
       password: passwordInputRef.current.value
     };
 
-    submitHandler(formBody);
+    if (formRef.current.reportValidity()) {
+      submitHandler(formBody);
+    }
   }
 
   return (
-    <form onSubmit={submitForm}>
+    <form
+      ref={formRef}
+      onSubmit={submitForm}
+      className={styles.form}
+    >
       <div className="input-wrapper">
-        <label htmlFor="userName">Username</label>
+        <label htmlFor="email">Email</label>
         <input
-          type="text"
-          id="userName"
-          ref={userNameInputRef}
+          type="email"
+          id="email"
+          ref={emailInputRef}
+          required
         />
       </div>
       <div className="input-wrapper">
@@ -31,6 +39,9 @@ const AuthForm = ({ submitHandler }) => {
           type="password"
           id="password"
           ref={passwordInputRef}
+          pattern="(?=.*[a-z])(?=.*\d)[\w]{5,}"
+          title="Le mot de passe doit contenir au minimum 6 lettres dont une minuscule et un chiffre"
+          required
         />
       </div>
       <div className="input-remember">

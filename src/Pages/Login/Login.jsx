@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { SignForm } from "../../Components";
+import { AuthForm } from "../../Components";
 import { authMiddleware } from "../../middlewares";
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const authenticated = useSelector(({ profile }) => profile.authenticated);
 
-  async function handler(data) {
+  async function loginFormHandler(data) {
     dispatch(authMiddleware(data));
   }
 
@@ -25,7 +25,7 @@ const Login = () => {
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <SignForm handler={handler} />
+        <AuthForm submitHandler={loginFormHandler} />
       </section>
     </main>
   );

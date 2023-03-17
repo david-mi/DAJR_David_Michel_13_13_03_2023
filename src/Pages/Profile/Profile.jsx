@@ -15,7 +15,7 @@ const Profile = () => {
     setDisplayEditForm((prev) => !prev);
   }
 
-  async function formEditHandler(data) {
+  async function editFormHandler(data) {
     const succeed = await dispatch(editProfileMiddleware(data));
     if (succeed) {
       setDisplayEditForm(false);
@@ -29,7 +29,7 @@ const Profile = () => {
         {displayEditForm
           ? <EditProfile
             closeForm={handleDisplayEditForm}
-            submitHandler={formEditHandler}
+            submitHandler={editFormHandler}
             firstName={firstName}
             lastName={lastName}
           />

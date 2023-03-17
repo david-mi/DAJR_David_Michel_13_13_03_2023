@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const SignForm = ({ handler }) => {
+const AuthForm = ({ submitHandler }) => {
   const userNameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
@@ -12,7 +12,7 @@ const SignForm = ({ handler }) => {
       password: passwordInputRef.current.value
     };
 
-    handler(formBody);
+    submitHandler(formBody);
   }
 
   return (
@@ -42,4 +42,4 @@ const SignForm = ({ handler }) => {
   );
 };
 
-export default SignForm;
+export default AuthForm;

@@ -4,6 +4,7 @@ import Accounts from "../../Components/Accounts/Accounts";
 import { accountsData } from "./accountsData";
 import { editProfileMiddleware } from "../../middlewares";
 import EditProfile from "../../Components/EditProfile/EditProfile";
+import { actions } from "../../reducers/profile/profile";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Profile = () => {
 
   function handleDisplayEditForm() {
     setDisplayEditForm((prev) => !prev);
+    dispatch(actions.disconnect("edit"));
   }
 
   async function editFormHandler(data) {

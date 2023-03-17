@@ -7,7 +7,12 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    disconnect(state) {
+    disconnect(state, { payload }) {
+      if (payload && payload in initialState) {
+        state.edit = initialState[payload];
+        return;
+      }
+
       return {
         ...initialState,
         hasDisconnected: true
@@ -23,7 +28,7 @@ const profileSlice = createSlice({
     },
     loginRejected(state, { payload }) {
       state.login.status = fetchStatus.FAILED;
-      state.login.error = "Echec du login";
+      state.login.error = payload;
     },
     getPending(state) {
       state.get = initialState.get;
@@ -61,7 +66,7 @@ const profileSlice = createSlice({
     editRejected(state, { payload }) {
       state.edit = {
         status: fetchStatus.FAILED,
-        error: "Echec de l'édition du profil"
+        error: payload
       };
     }
   },

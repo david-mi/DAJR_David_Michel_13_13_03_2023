@@ -3,15 +3,16 @@ import { useSelector } from "react-redux";
 import { fetchStatus } from "../reducers";
 
 const PrivateRoutes = () => {
-  const status = useSelector((({ profile }) => profile.get.status));
+  const retreiveProfileStatus = useSelector((({ profile }) => profile.get.status));
+  const authenticated = useSelector(({ profile }) => profile.authenticated);
 
-  switch (status) {
-    case fetchStatus.PENDING:
+  switch (true) {
+    case retreiveProfileStatus === fetchStatus.PENDING:
       return <h1>Chargement...</h1>;
-    case fetchStatus.FAILED:
-      return <Navigate to="/sign-in" />;
-    case fetchStatus.IDLE:
+    case authenticated:
       return <Outlet />;
+    default:
+      return <Navigate to="/sign-in" />;
   }
 };
 

@@ -17,10 +17,11 @@ const navProps = {
 const App = () => {
   const dispatch = useDispatch();
   const authenticated = useSelector(({ profile }) => profile.authenticated);
+  const hasDisconnected = useSelector(({ profile }) => profile.hasDisconnected);
 
   useEffect(() => {
-    if (authenticated === false) {
-      dispatch(getProfileMiddleware());
+    if (authenticated === false && hasDisconnected === false) {
+      dispatch(getProfileMiddleware);
     }
   }, [authenticated]);
 

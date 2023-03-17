@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SignForm } from "../../Components";
-import { authMiddleware } from "../../middlewares/auth";
+import { authMiddleware } from "../../middlewares";
 
 const Login = () => {
   const dispatch = useDispatch();

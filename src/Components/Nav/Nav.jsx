@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Logo, User, Guest } from "./index";
-import { disconnectMiddleware } from "../../middlewares/reset";
+import { disconnectMiddleware } from "../../middlewares/disconnect";
 
 const Nav = ({ image, title }) => {
   const dispatch = useDispatch();

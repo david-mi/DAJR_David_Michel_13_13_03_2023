@@ -7,60 +7,65 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    reset() {
-      return initialState;
-    }
-  },
-  extraReducers: (profiler) => {
-    profiler.addCase(authMiddleware.pending, (state) => {
+    disconnect(state) {
+      return {
+        ...initialState,
+        hasDisconnected: true
+      };
+    },
+    loginPending(state) {
       state.login.status = fetchStatus.PENDING;
       state.login.error = null;
-    });
-    profiler.addCase(authMiddleware.fulfilled, (state) => {
+      state.hasDisconnected = false;
+    },
+    loginFulfilled(state) {
       state.login.status = fetchStatus.IDLE;
-    });
-    profiler.addCase(authMiddleware.rejected, (state, { error }) => {
+    },
+    loginRejected(state, { payload }) {
       state.login.status = fetchStatus.FAILED;
       state.login.error = "Echec du login";
-    });
-    profiler.addCase(getProfileMiddleware.pending, (state) => {
+    },
+    getPending(state) {
       state.get = initialState.get;
       state.authenticated = false;
-    });
-    profiler.addCase(getProfileMiddleware.fulfilled, (state, { payload }) => {
+    },
+    getFulfilled(state, { payload }) {
       return {
         ...state,
         ...payload,
-        get: initialState.get,
+        get: {
+          status: fetchStatus.IDLE,
+          error: null
+        },
         authenticated: true
       };
-    });
-    profiler.addCase(getProfileMiddleware.rejected, (state, { error }) => {
+    },
+    getRejected(state, { payload }) {
       return {
         ...initialState,
         get: {
           status: fetchStatus.FAILED,
-          error: "Echec de la récupération du profil"
+          error: payload
         }
       };
-    });
-    profiler.addCase(editProfileMiddleware.pending, (state) => {
+    },
+    editPending(state) {
       state.edit.status = fetchStatus.PENDING;
       state.edit.error = null;
-    });
-    profiler.addCase(editProfileMiddleware.fulfilled, (state, { payload }) => {
+    },
+    editFulfilled(state, { payload }) {
       state.firstName = payload.firstName;
       state.lastName = payload.lastName;
       state.edit = initialState.edit;
-    });
-    profiler.addCase(editProfileMiddleware.rejected, (state, { error }) => {
+    },
+    editRejected(state, { payload }) {
       state.edit = {
-        state: fetchStatus.FAILED,
+        status: fetchStatus.FAILED,
         error: "Echec de l'édition du profil"
       };
-    });
-  }
+    }
+  },
 });
 
 export const profileReducer = profileSlice.reducer;
-export const resetProfile = profileSlice.actions.reset;
+export const actions = profileSlice.actions;

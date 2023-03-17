@@ -1,13 +1,40 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import { userService } from "../Services/User/User";
-import { getStorageTokenOrThrow } from "../utils";
+import { getStorageTokenOrThrow, setStorageToken } from "../utils";
+import { errorMiddleware } from "./";
+import { actions } from "../reducers/profile/profile";
 
-export const getProfileMiddleware = createAsyncThunk("user/profile/get", async () => {
-  const token = getStorageTokenOrThrow();
-  return await userService.getProfile(token);
-});
+export const authMiddleware = (payload) => async (dispatch) => {
+  try {
+    dispatch(actions.loginPending());
+    const token = await userService.login(payload);
+    setStorageToken(token);
+    dispatch(actions.loginFulfilled());
+  } catch (error) {
+    dispatch(errorMiddleware(error, actions.loginRejected));
+  }
 
-export const editProfileMiddleware = createAsyncThunk("user/profile/edit", async (payload) => {
-  const token = getStorageTokenOrThrow();
-  return await userService.editProfile({ ...payload }, token);
-});
+  dispatch(getProfileMiddleware);
+};
+
+export async function getProfileMiddleware(dispatch) {
+  try {
+    const token = getStorageTokenOrThrow();
+    dispatch(actions.getPending());
+    const profileData = await userService.getProfile(token);
+    dispatch(actions.getFulfilled(profileData));
+  } catch (error) {
+    dispatch(errorMiddleware(error, actions.getRejected));
+  }
+}
+
+export const editProfileMiddleware = (payload) => async (dispatch) => {
+  try {
+    const token = getStorageTokenOrThrow();
+    dispatch(actions.editPending());
+    const profileData = await userService.editProfile({ ...payload }, token);
+    await dispatch(actions.editFulfilled(profileData));
+    return true;
+  } catch (error) {
+    dispatch(errorMiddleware(error, actions.editRejected));
+  }
+};

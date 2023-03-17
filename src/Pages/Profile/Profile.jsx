@@ -16,8 +16,8 @@ const Profile = () => {
   }
 
   async function formEditHandler(data) {
-    const { meta } = await dispatch(editProfileMiddleware(data));
-    if (meta.requestStatus === "fulfilled") {
+    const succeed = await dispatch(editProfileMiddleware(data));
+    if (succeed) {
       setDisplayEditForm(false);
     }
   }

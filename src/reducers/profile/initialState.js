@@ -16,5 +16,6 @@ export const initialState = {
     status: fetchStatus.IDLE,
     error: null
   },
-  authenticated: false
+  authenticated: false,
+  hasDisconnected: false
 };

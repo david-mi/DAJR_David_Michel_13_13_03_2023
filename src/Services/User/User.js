@@ -1,5 +1,4 @@
 import { userModeling } from "./Modeling";
-import { getStorageTokenOrThrow } from "../../utils";
 
 class User {
   #API_USER_URL = `${process.env.REACT_APP_API_BASE_URL}/user`;
@@ -7,11 +6,15 @@ class User {
   async #fetchOrThrow(endpoint, options) {
     const url = `${this.#API_USER_URL}/${endpoint}`;
     const response = await fetch(url, options);
+    const data = await response.json();
+
     if (response.ok === false) {
-      throw new Error(response.statusText);
+      const error = new Error(data.message || response.statusText);
+      error.status = response.status;
+      throw error;
     }
 
-    return await response.json();
+    return data;
   }
 
   async login(payload) {

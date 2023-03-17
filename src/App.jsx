@@ -6,14 +6,6 @@ import Routes from "./Routes/Routes";
 import { Footer, Nav } from "./Components";
 import { getProfileMiddleware } from "./middlewares";
 
-const navProps = {
-  image: {
-    src: "./argentBankLogo.png",
-    alt: "Argent Bank Logo"
-  },
-  title: "Argent Bank"
-};
-
 const App = () => {
   const dispatch = useDispatch();
   const authenticated = useSelector(({ profile }) => profile.authenticated);
@@ -27,7 +19,10 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Nav {...navProps} />
+      <Nav
+        image={{ src: "./argentBankLogo.png", alt: "Argent Bank Logo" }}
+        title="Argent Bank"
+      />
       <Routes />
       <Footer />
     </BrowserRouter>

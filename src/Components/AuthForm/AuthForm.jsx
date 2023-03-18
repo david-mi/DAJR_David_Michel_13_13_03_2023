@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import styles from "./authForm.module.css";
 
-const AuthForm = ({ submitHandler, error }) => {
+const AuthForm = ({ submitHandler }) => {
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const formRef = useRef(null);
+  const { status, error } = useSelector(({ profile }) => profile.login);
 
   function submitForm(event) {
     event.preventDefault();

@@ -12,7 +12,6 @@ const EditProfile = (props) => {
 
   const { status, error } = useSelector(({ profile }) => profile.edit);
   const isSendingRequest = status === fetchStatus.PENDING;
-  console.log(isSendingRequest);
 
   const namePattern = {
     required: true,

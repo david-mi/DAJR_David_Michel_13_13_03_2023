@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfileMiddleware, editProfileMiddleware, authMiddleware } from "../../middlewares";
 import { initialState } from "./initialState";
-import { fetchStatus } from "../enums";
+import { fetchStatus } from "../../enums";
 
 const profileSlice = createSlice({
   name: "profile",

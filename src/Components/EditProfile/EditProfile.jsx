@@ -2,7 +2,7 @@ import styles from "./editProfile.module.css";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
-import { fetchStatus } from "../../reducers/enums";
+import { fetchStatus } from "../../enums";
 
 const EditProfile = (props) => {
   const { firstName, lastName, closeForm, submitHandler } = props;

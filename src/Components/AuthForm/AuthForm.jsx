@@ -2,7 +2,7 @@ import { useRef } from "react";
 import styles from "./authForm.module.css";
 import Loader from "../../Components/Loader/Loader";
 import { useSelector } from "react-redux";
-import { fetchStatus } from "../../reducers/enums";
+import { fetchStatus } from "../../enums";
 
 const AuthForm = ({ submitHandler }) => {
   const emailInputRef = useRef(null);

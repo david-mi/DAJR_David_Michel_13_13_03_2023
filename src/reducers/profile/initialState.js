@@ -1,4 +1,4 @@
-import { fetchStatus } from "../enums";
+import { fetchStatus } from "../../enums";
 
 export const initialState = {
   firstName: "",

@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { fetchStatus } from "../reducers";
+import { fetchStatus } from "../enums";
 
 const PrivateRoutes = () => {
   const retreiveProfileStatus = useSelector((({ profile }) => profile.get.status));

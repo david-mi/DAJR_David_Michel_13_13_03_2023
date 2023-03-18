@@ -7,6 +7,7 @@ import { fetchStatus } from "../../enums";
 const AuthForm = ({ submitHandler }) => {
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
+  const rememberMeRef = useRef(null);
   const formRef = useRef(null);
   const { status, error } = useSelector(({ profile }) => profile.login);
   const isSendingRequest = status === fetchStatus.PENDING;
@@ -16,7 +17,8 @@ const AuthForm = ({ submitHandler }) => {
 
     const formBody = {
       email: emailInputRef.current.value,
-      password: passwordInputRef.current.value
+      password: passwordInputRef.current.value,
+      remember: rememberMeRef.current.checked
     };
 
     if (formRef.current.reportValidity()) {
@@ -53,7 +55,12 @@ const AuthForm = ({ submitHandler }) => {
         />
       </div>
       <div className="input-remember">
-        <input type="checkbox" id="remember-me" disabled={isSendingRequest} />
+        <input
+          type="checkbox"
+          id="remember-me"
+          disabled={isSendingRequest}
+          ref={rememberMeRef}
+        />
         <label htmlFor="remember-me">Remember me</label>
       </div>
       <button className="sign-in-button" disabled={isSendingRequest}>

@@ -1,6 +1,8 @@
 import styles from "./editProfile.module.css";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
+import Loader from "../Loader/Loader";
+import { fetchStatus } from "../../reducers/enums";
 
 const EditProfile = (props) => {
   const { firstName, lastName, closeForm, submitHandler } = props;
@@ -8,13 +10,16 @@ const EditProfile = (props) => {
   const lastNameRef = useRef(null);
   const formRef = useRef(null);
 
-  const editProfileError = useSelector(({ profile }) => profile.edit.error);
+  const { status, error } = useSelector(({ profile }) => profile.edit);
+  const isSendingRequest = status === fetchStatus.PENDING;
+  console.log(isSendingRequest);
 
   const namePattern = {
     required: true,
     type: "text",
     pattern: "^[a-zA-ZÀ-ö]{1}[a-z-À-ö ]*[a-zA-ZÀ-ö]{1}$",
-    title: "Le prénom doit comporter au minimum 2 caractères, commencer et finir par une lettre"
+    title: "Le prénom doit comporter au minimum 2 caractères, commencer et finir par une lettre",
+    disabled: isSendingRequest
   };
 
   function submitForm(event) {
@@ -50,15 +55,19 @@ const EditProfile = (props) => {
         className={styles.lastName}
         defaultValue={lastName}
       />
-      <button className={styles.save}>Save</button>
+      <button className={styles.save} disabled={isSendingRequest}>
+        Save
+        {isSendingRequest && <Loader className={styles.loader} />}
+      </button>
       <button
         className={styles.cancel}
         onClick={closeForm}
         type="button"
+        disabled={isSendingRequest}
       >
         Cancel
       </button>
-      {editProfileError && <small className={styles.error}>{editProfileError}</small>}
+      {error && <small className={styles.error}>{error}</small>}
     </form>
   );
 };

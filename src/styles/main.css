@@ -158,6 +158,7 @@ html {
 
 .sign-in-button {
   display: block;
+  position: relative;
   width: 100%;
   padding: 8px;
   font-size: 1.1rem;
@@ -166,6 +167,15 @@ html {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+  margin-bottom: 5px;
+}
+
+.sign-in-button:disabled {
+  --main: #888888;
+  background-color: var(--main);
+  border-color: var(--main);
+  color: rgba(221, 221, 221, 0.671);
+  border: solid 1px;
 }
 
 .sign-in-content {

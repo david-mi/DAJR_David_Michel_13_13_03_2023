@@ -3,3 +3,9 @@
   font-weight: bold;
   color: red;
 }
+
+.loader {
+  scale: 0.4;
+  top: 3px;
+  right: 50px;
+}

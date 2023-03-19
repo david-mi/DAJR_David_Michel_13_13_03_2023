@@ -5,7 +5,7 @@ export const initialState = {
   lastName: "",
   email: "",
   get: {
-    status: fetchStatus.IDLE,
+    status: fetchStatus.PENDING,
     error: null
   },
   edit: {

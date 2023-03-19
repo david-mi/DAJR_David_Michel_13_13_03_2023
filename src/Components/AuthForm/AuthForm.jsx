@@ -9,8 +9,14 @@ const AuthForm = ({ submitHandler }) => {
   const passwordInputRef = useRef(null);
   const rememberMeRef = useRef(null);
   const formRef = useRef(null);
-  const { status, error } = useSelector(({ profile }) => profile.login);
-  const isSendingRequest = status === fetchStatus.PENDING;
+  const { status: loginStatus, error: loginError } = useSelector(({ profile }) => profile.login);
+  const { status: profileStatus, error: profileError } = useSelector(({ profile }) => profile.get);
+
+  const isSendingRequest = (
+    loginStatus === fetchStatus.PENDING ||
+    profileStatus === fetchStatus.PENDING
+  );
+  const error = loginError || profileError;
 
   function submitForm(event) {
     event.preventDefault();

@@ -4,9 +4,11 @@ import { fetchStatus } from "../enums";
 
 /**
  * Handling private routes
+ * 
  * - if profile is being fetched, return a waiting screen
  * - if user is authenticated, return {@link Outlet}
  * - redirect to sign-in page by default
+ * 
  */
 
 const PrivateRoutes = () => {

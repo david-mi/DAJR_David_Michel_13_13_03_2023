@@ -6,7 +6,7 @@ import { UserPropTypes } from "./propTypes";
  * 
  * @param {Object} props
  * @param {string} props.firstName
- * @param {() =>} props.disconnect handler to disconnect user from the application
+ * @param {function()} props.disconnect handler to disconnect user from the application
  * @returns {JSX.Element}
  */
 

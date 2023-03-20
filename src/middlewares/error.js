@@ -1,7 +1,7 @@
 import { disconnectMiddleware } from "./disconnect";
 
 /**
- * Custom class to use for when user has no authentification token
+ * Custom error to use when user got no authentification token
  */
 
 export class MissingTokenError extends Error {
@@ -14,11 +14,11 @@ export class MissingTokenError extends Error {
 /**
  * Handle reject action when getting error from another middleware
  * 
- * if error has a 401 status or user doesn't have any authentification
+ * if error got a 401 status or user doesn't have any authentification
  * token stored, calls {@link disconnectMiddleware}
  * 
  * @param {error} error retrieved error
- * @param {(string) => } rejectAction reject action to call
+ * @param {function(string) } rejectAction reject action to call
  */
 
 export const errorMiddleware = (error, rejectAction) => async (dispatch) => {

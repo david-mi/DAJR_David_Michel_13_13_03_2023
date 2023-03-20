@@ -6,6 +6,12 @@ import { editProfileMiddleware } from "../../middlewares";
 import ProfileForm from "../../Components/ProfileForm/ProfileForm";
 import { actions } from "../../reducers/profile/profile";
 
+/**
+ * Profile page
+ * 
+ * @returns {JSX.Element}
+ */
+
 const Profile = () => {
   const dispatch = useDispatch();
   const firstName = useSelector(({ profile }) => profile.firstName);

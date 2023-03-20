@@ -3,6 +3,7 @@ import { Logo, User, Guest } from "./index";
 import { disconnectMiddleware } from "../../middlewares/disconnect";
 
 /**
+ * Main Navbar
  * Display {@link User} menu if authenticated or {@link Guest}
  * 
  * @param {Object} Props 

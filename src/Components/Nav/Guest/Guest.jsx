@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 /**
  * Guest version of navbar menu
-
+ *
  * @returns {JSX.Element}
  */
 

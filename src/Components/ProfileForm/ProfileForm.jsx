@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 import { fetchStatus } from "../../enums";
@@ -6,11 +6,11 @@ import styles from "./profileForm.module.css";
 import { ProfileFormPropTypes } from "./propTypes";
 
 /**
- * Profile edition form
+ * Profile modification form
  * 
  * @param {Object} props
- * @param {() =>} props.submitHandler handler to dispatch information to the store
- * @param {() =>} props.closeForm handler to close form
+ * @param {function(Object)} props.submitHandler handler to dispatch information to the store
+ * @param {function()} props.closeForm handler to close form
  * @param {string} props.firstName
  * @param {string} props.lastName
  * @returns {JSX.Element}
@@ -40,7 +40,7 @@ const ProfileForm = (props) => {
    * passing {@link formBody} as parameter
    * - if data didn't change, set an error and prevent submitting
    * 
-   * @param {import("react").FormEvent} event 
+   * @param {React.FormEvent} event 
    */
 
   function submitForm(event) {

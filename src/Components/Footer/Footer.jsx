@@ -1,5 +1,11 @@
 import React from 'react';
 
+/**
+ * Footer with copyrights
+ * 
+ * @returns {JSX.Element}
+ */
+
 const Footer = () => {
   return (
     <footer className="footer">

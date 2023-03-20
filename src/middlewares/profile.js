@@ -31,6 +31,7 @@ export const authMiddleware = (payload) => async (dispatch) => {
 /**
  * - Handle dispatchs and services calls to retrieve user profile data
  * - if request fails or authentification token is missing, dispatch {@link errorMiddleware}
+ * 
  */
 
 export async function getProfileMiddleware(dispatch) {
@@ -43,6 +44,7 @@ export async function getProfileMiddleware(dispatch) {
     dispatch(errorMiddleware(error, actions.getRejected));
   }
 }
+
 
 /**
  * - Handle dispatchs and services calls to edit user's profile

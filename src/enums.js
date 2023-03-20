@@ -1,5 +1,5 @@
 /**
- * Fetch status from the store, helps to avoid typos
+ * All fetching status
  */
 
 export const fetchStatus = {

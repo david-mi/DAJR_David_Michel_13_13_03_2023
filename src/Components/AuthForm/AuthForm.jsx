@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import styles from "./authForm.module.css";
 import Loader from "../../Components/Loader/Loader";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import { AuthFormPropTypes } from "./propTypes";
  * Authentication form
  * 
  * @param {Object} props
- * @param {() =>} props.submitHandler handler to dispatch information to the store
+ * @param {function(Object)} props.submitHandler handler to dispatch information to the store
  * @returns {JSX.Element}
  */
 
@@ -32,7 +32,7 @@ const AuthForm = ({ submitHandler }) => {
    * if reportValidity returns true on the form, calls {@link submitHandler}
    * passing {@link formBody} as parameter
    * 
-   * @param {import("react").FormEvent} event 
+   * @param {React.FormEvent} event 
    */
 
   function submitForm(event) {

@@ -1,3 +1,9 @@
+/**
+ * Hero component
+ * 
+ * @returns {JSX.Element}
+ */
+
 const Hero = () => {
   return (
     <div className="hero">

@@ -1,3 +1,20 @@
+import { AccountPropTypes } from "./propTypes";
+
+/**
+ * @typedef Account
+ * @type {Object}
+ * @property {string} title
+ * @property {string} amount
+ * @property {string} description
+ */
+
+/**
+ * Account component
+ * 
+ * @param {Account} props
+ * @returns {JSX.Element}
+ */
+
 const Account = ({ title, amount, description }) => {
   return (
     <section className="account">
@@ -12,5 +29,7 @@ const Account = ({ title, amount, description }) => {
     </section>
   );
 };
+
+Account.propTypes = AccountPropTypes;
 
 export default Account;

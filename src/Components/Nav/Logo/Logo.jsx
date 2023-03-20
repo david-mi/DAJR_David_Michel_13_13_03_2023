@@ -1,4 +1,21 @@
 import { Link } from "react-router-dom";
+import { LogoPropTypes } from "./propTypes";
+
+/**
+ * @typedef LogoProps
+ * @type {Object}
+ * @property {string} title
+ * @property {Object} image
+ * @property {string} image.src
+ * @property {string} image.alt
+ */
+
+/**
+ * Main application logo
+ * 
+ * @param {LogoProps} props
+ * @returns {JSX.Element}
+ */
 
 const Logo = ({ image, title }) => {
   const { alt, src } = image;
@@ -13,5 +30,7 @@ const Logo = ({ image, title }) => {
     </Link>
   );
 };
+
+Logo.propTypes = LogoPropTypes;
 
 export default Logo;

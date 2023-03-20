@@ -3,6 +3,18 @@ import { useRef } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 import { fetchStatus } from "../../enums";
+import { EditProfileFormPropTypes } from "./propTypes";
+
+/**
+ * Profile edition form
+ * 
+ * @param {Object} props
+ * @param {() =>} props.submitHandler handler to dispatch information to the store
+ * @param {() =>} props.closeForm handler to close form
+ * @param {string} props.firstName
+ * @param {string} props.lastName
+ * @returns {JSX.Element}
+ */
 
 const EditProfile = (props) => {
   const { firstName, lastName, closeForm, submitHandler } = props;
@@ -70,5 +82,7 @@ const EditProfile = (props) => {
     </form>
   );
 };
+
+EditProfile.propTypes = EditProfileFormPropTypes;
 
 export default EditProfile;

@@ -3,6 +3,15 @@ import styles from "./authForm.module.css";
 import Loader from "../../Components/Loader/Loader";
 import { useSelector } from "react-redux";
 import { fetchStatus } from "../../enums";
+import { AuthFormPropTypes } from "./propTypes";
+
+/**
+ * Authentication form
+ * 
+ * @param {Object} props
+ * @param {() =>} props.submitHandler handler to dispatch information to the store
+ * @returns {JSX.Element}
+ */
 
 const AuthForm = ({ submitHandler }) => {
   const emailInputRef = useRef(null);
@@ -17,6 +26,15 @@ const AuthForm = ({ submitHandler }) => {
     profileStatus === fetchStatus.PENDING
   );
   const error = loginError || profileError;
+
+  /**
+   * Handle form submit
+   * 
+   * if reportValidity returns true on the form, calls {@link submitHandler}
+   * passing {@link formBody} as parameter
+   * 
+   * @param {import("react").FormEvent} event 
+   */
 
   function submitForm(event) {
     event.preventDefault();
@@ -77,5 +95,7 @@ const AuthForm = ({ submitHandler }) => {
     </form>
   );
 };
+
+AuthForm.propTypes = AuthFormPropTypes;
 
 export default AuthForm;

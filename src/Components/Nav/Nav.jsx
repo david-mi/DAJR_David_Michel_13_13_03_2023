@@ -2,20 +2,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { Logo, User, Guest } from "./index";
 import { disconnectMiddleware } from "../../middlewares/disconnect";
 
-const Nav = ({ image, title }) => {
+/**
+ * Display {@link User} menu if authenticated or {@link Guest}
+ * 
+ * @param {Object} Props 
+ * @returns {JSX.Element}
+ */
+
+const Nav = (props) => {
   const dispatch = useDispatch();
   const authenticated = useSelector(({ profile }) => profile.authenticated);
   const firstName = useSelector(({ profile }) => profile.firstName);
 
-  function handleSignout() {
+  function handleDisconnect() {
     dispatch(disconnectMiddleware);
   }
 
   return (
     <nav className="main-nav">
-      <Logo image={image} title={title} />
+      <Logo {...props} />
       {authenticated
-        ? <User firstName={firstName} signout={handleSignout} />
+        ? <User firstName={firstName} disconnect={handleDisconnect} />
         : <Guest />
       }
     </nav>

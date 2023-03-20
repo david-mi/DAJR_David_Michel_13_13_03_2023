@@ -1,13 +1,23 @@
 import { Link } from "react-router-dom";
+import { UserPropTypes } from "./propTypes";
 
-const User = ({ firstName, signout }) => {
+/**
+ * User version of navbar menu
+ * 
+ * @param {Object} props
+ * @param {string} props.firstName
+ * @param {() =>} props.disconnect handler to disconnect user from the application
+ * @returns {JSX.Element}
+ */
+
+const User = ({ firstName, disconnect }) => {
   return (
     <div>
       <Link className="main-nav-item" to="/profile">
         <i className="fa fa-user-circle"></i>
         {firstName}
       </Link>
-      <Link onClick={signout}
+      <Link onClick={disconnect}
         className="main-nav-item"
         to="/sign-in"
       >
@@ -17,5 +27,7 @@ const User = ({ firstName, signout }) => {
     </div>
   );
 };
+
+User.propTypes = UserPropTypes;
 
 export default User;

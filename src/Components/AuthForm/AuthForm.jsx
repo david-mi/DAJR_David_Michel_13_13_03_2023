@@ -17,7 +17,6 @@ const AuthForm = ({ submitHandler }) => {
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const rememberMeRef = useRef(null);
-  const formRef = useRef(null);
   const { status: loginStatus, error: loginError } = useSelector(({ profile }) => profile.login);
   const { status: profileStatus, error: profileError } = useSelector(({ profile }) => profile.get);
 
@@ -40,22 +39,18 @@ const AuthForm = ({ submitHandler }) => {
     event.preventDefault();
 
     const formBody = {
-      email: emailInputRef.current.value,
-      password: passwordInputRef.current.value,
+      email: emailInputRef.current.value.trim(),
+      password: passwordInputRef.current.value.trim(),
       remember: rememberMeRef.current.checked
     };
 
-    if (formRef.current.reportValidity()) {
+    if (event.target.reportValidity()) {
       submitHandler(formBody);
     }
   }
 
   return (
-    <form
-      ref={formRef}
-      onSubmit={submitForm}
-      className={styles.form}
-    >
+    <form onSubmit={submitForm} className={styles.form} >
       <div className="input-wrapper">
         <label htmlFor="email">Email</label>
         <input

@@ -14,7 +14,6 @@ const profileSlice = createSlice({
 
       return {
         ...initialState,
-        hasDisconnected: true,
         get: {
           status: fetchStatus.IDLE,
           error: null
@@ -24,7 +23,6 @@ const profileSlice = createSlice({
     loginPending(state) {
       state.login.status = fetchStatus.PENDING;
       state.login.error = null;
-      state.hasDisconnected = false;
     },
     loginFulfilled(state) {
       state.login.status = fetchStatus.IDLE;

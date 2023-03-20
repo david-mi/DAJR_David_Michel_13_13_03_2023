@@ -17,5 +17,4 @@ export const initialState = {
     error: null
   },
   authenticated: false,
-  hasDisconnected: false
 };

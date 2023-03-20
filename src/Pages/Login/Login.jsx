@@ -5,12 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthForm } from "../../Components";
 import { authMiddleware } from "../../middlewares";
 
+/**
+ * Login page
+ * 
+ * @returns {JSX.Element}
+ */
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const authenticated = useSelector(({ profile }) => profile.authenticated);
 
-  async function loginFormHandler(data) {
+  /**
+   * Handler to dispatch retrieved form data to {@link authMiddleware}
+   * 
+   * @param {Object} data form body to use as middleware payload
+   */
+
+  function loginFormHandler(data) {
     dispatch(authMiddleware(data));
   }
 

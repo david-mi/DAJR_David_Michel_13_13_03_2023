@@ -12,14 +12,31 @@ const Profile = () => {
   const lastName = useSelector(({ profile }) => profile.lastName);
   const [displayEditForm, setDisplayEditForm] = useState(false);
 
+  /**
+   * Handler to toggle {@link displayEditForm} state
+   */
+
   function handleDisplayEditForm() {
     setDisplayEditForm((prev) => !prev);
   }
+
+  /**
+   * Handler to close {@link displayEditForm} state
+   * - dispatch action to reset edit.error store state
+   */
 
   function handleCloseEditForm() {
     setDisplayEditForm(false);
     dispatch(actions.editResetError());
   }
+
+  /**
+   * Handler to dispatch retrieved form data to {@link editProfileMiddleware}
+   * - If data has been successfully sent, close form
+   * 
+   * @param {Object} data form body to use as middleware payload
+   */
+
   async function editFormHandler(data) {
     const succeed = await dispatch(editProfileMiddleware(data));
     if (succeed) {

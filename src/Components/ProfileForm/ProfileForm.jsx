@@ -1,8 +1,8 @@
-import styles from "./profileForm.module.css";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 import { fetchStatus } from "../../enums";
+import styles from "./profileForm.module.css";
 import { ProfileFormPropTypes } from "./propTypes";
 
 /**
@@ -20,10 +20,10 @@ const ProfileForm = (props) => {
   const { firstName, lastName, closeForm, submitHandler } = props;
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
-  const formRef = useRef(null);
-
   const { status, error } = useSelector(({ profile }) => profile.edit);
+  const [validationError, setValidationError] = useState(null);
   const isSendingRequest = status === fetchStatus.PENDING;
+  const hasError = error || validationError;
 
   const namePattern = {
     required: true,
@@ -33,38 +33,62 @@ const ProfileForm = (props) => {
     disabled: isSendingRequest
   };
 
+  /**
+   * Handle form submit
+   * 
+   * - if reportValidity returns true on the form, calls {@link submitHandler}
+   * passing {@link formBody} as parameter
+   * - if data didn't change, set an error and prevent submitting
+   * 
+   * @param {import("react").FormEvent} event 
+   */
+
   function submitForm(event) {
     event.preventDefault();
 
     const formBody = {
-      firstName: firstNameRef.current.value,
-      lastName: lastNameRef.current.value
+      firstName: firstNameRef.current.value.trim(),
+      lastName: lastNameRef.current.value.trim()
     };
 
-    if (formRef.current.reportValidity()) {
+    if (isDataUnchanged(formBody.firstName, formBody.lastName)) {
+      return setValidationError("Les informations sont identiques");
+    }
+
+    if (event.target.reportValidity()) {
       submitHandler(formBody);
     }
   }
 
+  /**
+   * Verify if firstName and lastName didn't change on form submit
+   * 
+   * @param {string} firstNameUpdate 
+   * @param {string} lastNameUpdate 
+   * @returns {boolean}
+   */
+
+  function isDataUnchanged(firstNameUpdate, lastNameUpdate) {
+    return firstNameUpdate === firstName && lastNameUpdate === lastName;
+  }
+
   return (
-    <form
-      className={styles.form}
-      onSubmit={submitForm}
-      ref={formRef}
-    >
+    <form className={styles.form} onSubmit={submitForm}>
       <input
         {...namePattern}
         placeholder="Prénom"
-        ref={firstNameRef}
         className={styles.firstName}
         defaultValue={firstName}
+        name="firstName"
+        ref={firstNameRef}
       />
       <input
         {...namePattern}
         placeholder="Nom"
-        ref={lastNameRef}
         className={styles.lastName}
         defaultValue={lastName}
+        name="lastName"
+        ref={lastNameRef}
       />
       <button className={styles.save} disabled={isSendingRequest}>
         Save
@@ -78,7 +102,7 @@ const ProfileForm = (props) => {
       >
         Cancel
       </button>
-      {error && <small className={styles.error}>{error}</small>}
+      {hasError && <small className={styles.error}>{error || validationError}</small>}
     </form>
   );
 };

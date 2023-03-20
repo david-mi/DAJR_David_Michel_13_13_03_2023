@@ -6,12 +6,7 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    disconnect(state, { payload }) {
-      if (payload && payload in initialState) {
-        state.edit = initialState[payload];
-        return;
-      }
-
+    disconnect() {
       return {
         ...initialState,
         get: {
@@ -69,6 +64,9 @@ const profileSlice = createSlice({
         status: fetchStatus.FAILED,
         error: payload
       };
+    },
+    editResetError(state) {
+      state.edit = initialState.edit;
     }
   },
 });

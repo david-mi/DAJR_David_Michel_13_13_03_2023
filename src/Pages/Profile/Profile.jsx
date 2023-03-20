@@ -14,9 +14,12 @@ const Profile = () => {
 
   function handleDisplayEditForm() {
     setDisplayEditForm((prev) => !prev);
-    dispatch(actions.disconnect("edit"));
   }
 
+  function handleCloseEditForm() {
+    setDisplayEditForm(false);
+    dispatch(actions.editResetError());
+  }
   async function editFormHandler(data) {
     const succeed = await dispatch(editProfileMiddleware(data));
     if (succeed) {
@@ -30,7 +33,7 @@ const Profile = () => {
         <h1>Welcome back<br />{firstName} {lastName}!</h1>
         {displayEditForm
           ? <EditProfile
-            closeForm={handleDisplayEditForm}
+            closeForm={handleCloseEditForm}
             submitHandler={editFormHandler}
             firstName={firstName}
             lastName={lastName}

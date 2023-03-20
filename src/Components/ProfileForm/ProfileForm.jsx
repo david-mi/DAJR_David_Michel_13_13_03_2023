@@ -1,9 +1,9 @@
-import styles from "./editProfile.module.css";
+import styles from "./profileForm.module.css";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 import { fetchStatus } from "../../enums";
-import { EditProfileFormPropTypes } from "./propTypes";
+import { ProfileFormPropTypes } from "./propTypes";
 
 /**
  * Profile edition form
@@ -16,7 +16,7 @@ import { EditProfileFormPropTypes } from "./propTypes";
  * @returns {JSX.Element}
  */
 
-const EditProfile = (props) => {
+const ProfileForm = (props) => {
   const { firstName, lastName, closeForm, submitHandler } = props;
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -83,6 +83,6 @@ const EditProfile = (props) => {
   );
 };
 
-EditProfile.propTypes = EditProfileFormPropTypes;
+ProfileForm.propTypes = ProfileFormPropTypes;
 
-export default EditProfile;
+export default ProfileForm;

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Accounts from "../../Components/Accounts/Accounts";
 import { accountsData } from "./accountsData";
 import { editProfileMiddleware } from "../../middlewares";
-import EditProfile from "../../Components/EditProfile/EditProfile";
+import ProfileForm from "../../Components/ProfileForm/ProfileForm";
 import { actions } from "../../reducers/profile/profile";
 
 const Profile = () => {
@@ -49,7 +49,7 @@ const Profile = () => {
       <div className="header">
         <h1>Welcome back<br />{firstName} {lastName}!</h1>
         {displayEditForm
-          ? <EditProfile
+          ? <ProfileForm
             closeForm={handleCloseEditForm}
             submitHandler={editFormHandler}
             firstName={firstName}

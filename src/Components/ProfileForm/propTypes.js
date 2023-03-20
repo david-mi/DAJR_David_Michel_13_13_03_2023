@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
 
-export const EditProfileFormPropTypes = {
+export const ProfileFormPropTypes = {
   submitHandler: PropTypes.func.isRequired
 };

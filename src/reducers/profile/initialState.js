@@ -3,7 +3,6 @@ import { fetchStatus } from "../../enums";
 export const initialState = {
   firstName: "",
   lastName: "",
-  email: "",
   get: {
     status: fetchStatus.PENDING,
     error: null

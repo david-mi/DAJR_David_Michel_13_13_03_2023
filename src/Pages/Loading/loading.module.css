@@ -1,0 +1,22 @@
+.loading {
+  position: sticky;
+  inset: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.title {
+  margin-top: 200px;
+}
+
+.loader div {
+  background-color: black;
+}
+
+.loader {
+  transform: scale(2) translateX(-40px);
+  left: 50%;
+  top: 50%;
+}

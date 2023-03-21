@@ -1,6 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { fetchStatus } from "../enums";
+import Loading from "../Pages/Loading/Loading";
 
 /**
  * Handling private routes
@@ -17,7 +18,7 @@ const PrivateRoutes = () => {
 
   switch (true) {
     case retreiveProfileStatus === fetchStatus.PENDING:
-      return <h1>Chargement...</h1>;
+      return <Loading />;
     case authenticated:
       return <Outlet />;
     default:

@@ -3,6 +3,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Profile from "../Pages/Profile/Profile";
 import PrivateRoutes from "./Private";
+import NotFound from "../Pages/NotFound/NotFound";
 
 export default () => {
   return (
@@ -12,7 +13,7 @@ export default () => {
       <Route element={<PrivateRoutes />}>
         <Route path="/profile" element={<Profile />} />
       </Route>
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

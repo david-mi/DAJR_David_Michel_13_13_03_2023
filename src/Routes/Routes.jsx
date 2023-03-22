@@ -8,7 +8,7 @@ export default () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/sign-in" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/profile" element={<Profile />} />
       </Route>

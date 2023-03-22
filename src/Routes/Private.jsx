@@ -22,7 +22,7 @@ const PrivateRoutes = () => {
     case authenticated:
       return <Outlet />;
     default:
-      return <Navigate to="/sign-in" />;
+      return <Navigate to="/login" />;
   }
 };
 

@@ -19,7 +19,7 @@ const User = ({ firstName, disconnect }) => {
       </Link>
       <Link onClick={disconnect}
         className="main-nav-item"
-        to="/sign-in"
+        to="/login"
       >
         <i className="fa fa-sign-out"></i>
         Sign Out

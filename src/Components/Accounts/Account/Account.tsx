@@ -1,21 +1,11 @@
 import { AccountPropTypes } from "./propTypes";
-
-/**
- * @typedef Account
- * @type {Object}
- * @property {string} title
- * @property {string} amount
- * @property {string} description
- */
+import type { Account as Props } from "../Accounts";
 
 /**
  * Account component
- * 
- * @param {Account} props
- * @returns {JSX.Element}
  */
 
-const Account = ({ title, amount, description }) => {
+const Account = ({ title, amount, description }: Props) => {
   return (
     <section className="account">
       <div className="account-content-wrapper">

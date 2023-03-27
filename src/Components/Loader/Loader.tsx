@@ -1,15 +1,16 @@
 import styles from "./loader.module.css";
 import { LoaderPropTypes } from "./propTypes";
 
+interface Props {
+  className: string
+}
+
 /**
  * Loader reused everwhere need on the application
  * 
- * @param {Object} props
- * @param {string} className
- * @returns {JSX.Element}
  */
 
-const Loader = ({ className }) => {
+const Loader = ({ className }: Props) => {
   return (
     <div className={`${styles.loader} ${className}`}>
       <div></div>

@@ -1,7 +1,5 @@
 /**
  * Hero component
- * 
- * @returns {JSX.Element}
  */
 
 const Hero = () => {

@@ -1,24 +1,26 @@
-import React, { useRef } from "react";
+import React, { FormEvent, useRef } from "react";
 import styles from "./authForm.module.css";
-import Loader from "../../Components/Loader/Loader";
-import { useSelector } from "react-redux";
+import Loader from "../Loader/Loader";
+import { useAppSelector } from "../../hooks";
 import { fetchStatus } from "../../enums";
 import { AuthFormPropTypes } from "./propTypes";
+import type { AuthPayload } from "../../Pages/Login/Login";
+
+interface Props {
+  /** handler to dispatch information to the store */
+  submitHandler: (data: AuthPayload) => void
+}
 
 /**
  * Authentication form
- * 
- * @param {Object} props
- * @param {function(Object)} props.submitHandler handler to dispatch information to the store
- * @returns {JSX.Element}
  */
 
-const AuthForm = ({ submitHandler }) => {
-  const emailInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
-  const rememberMeRef = useRef(null);
-  const { status: loginStatus, error: loginError } = useSelector(({ profile }) => profile.login);
-  const { status: profileStatus, error: profileError } = useSelector(({ profile }) => profile.get);
+const AuthForm = ({ submitHandler }: Props) => {
+  const emailInputRef = useRef<null | HTMLInputElement>(null);
+  const passwordInputRef = useRef<null | HTMLInputElement>(null);
+  const rememberMeRef = useRef<null | HTMLInputElement>(null);
+  const { status: loginStatus, error: loginError } = useAppSelector(({ profile }) => profile.login);
+  const { status: profileStatus, error: profileError } = useAppSelector(({ profile }) => profile.get);
 
   const isSendingRequest = (
     loginStatus === fetchStatus.PENDING ||
@@ -35,16 +37,16 @@ const AuthForm = ({ submitHandler }) => {
    * @param {React.FormEvent} event 
    */
 
-  function submitForm(event) {
+  function submitForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formBody = {
-      email: emailInputRef.current.value.trim(),
-      password: passwordInputRef.current.value.trim(),
-      remember: rememberMeRef.current.checked
+      email: emailInputRef.current!.value.trim(),
+      password: passwordInputRef.current!.value.trim(),
+      remember: rememberMeRef.current!.checked
     };
 
-    if (event.target.reportValidity()) {
+    if ((event.target as HTMLFormElement).reportValidity()) {
       submitHandler(formBody);
     }
   }

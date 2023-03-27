@@ -1,4 +1,5 @@
-import { MissingTokenError } from "../../middlewares/error";
+import { MissingTokenError } from "../../CustomErrors"
+import type { AuthResponse, GetProfileResponse, EditProfileResponse } from "./types";
 
 /**
  * Data modeling class for user
@@ -9,12 +10,11 @@ class UserModeling {
   /**
    * Modeling retrieved data from login request
    * 
-   * @param {Object} data data retrieved from api after login request
-   * @returns {string} user token
+   * @returns user token
    * @throws {MissingTokenError} if token is missing
    */
 
-  auth(data) {
+  auth(data: AuthResponse) {
     const token = data.body.token;
     if (!token) throw new MissingTokenError("Token not found !");
     return token;
@@ -23,15 +23,10 @@ class UserModeling {
   /**
    * Modeling retrieved data from profile get infos request
    * 
-   * @param {Object} data retrieved from api after profile get infos request
-   * @param {Object} data.body extracted body informations from API
-   * @returns {{
-   *  firstName: string,
-   *  lastName: string
-   * }} user identity
+   * @returns user identity
    */
 
-  profile({ body }) {
+  profile({ body }: GetProfileResponse) {
     return {
       firstName: body.firstName || "",
       lastName: body.lastName || ""
@@ -41,15 +36,10 @@ class UserModeling {
   /**
    * Modeling retrieved data from profile edit request
    * 
-   * @param {Object} data data retrieved from api after profile edit request
-   * @param {Object} data.body extracted body informations from API
-   * @returns {{
-   *  firstName: string,
-   *  lastName: string
-   * }} user updated identity
+   * @returns user updated identity
    */
 
-  editProfile({ body }) {
+  editProfile({ body }: EditProfileResponse) {
     return {
       firstName: body.firstName || "",
       lastName: body.lastName || ""

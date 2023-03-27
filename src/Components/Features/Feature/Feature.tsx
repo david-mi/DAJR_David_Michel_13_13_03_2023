@@ -1,23 +1,11 @@
 import { FeaturePropTypes } from "./propTypes";
-
-/**
- * @typedef FeatureImage
- * @type {object}
- * @property {string} src
- * @property {string} alt
- */
+import type { Feature as Props } from "../Features";
 
 /**
  * Show feature, containing a title, text and image as logo
- * 
- * @param {object} props
- * @param {string} props.title 
- * @param {string} props.text 
- * @param {FeatureImage} props.image
- * @returns {JSX.Element}
  */
 
-const Feature = ({ title, text, image }) => {
+const Feature = ({ title, text, image }: Props) => {
   const { src, alt } = image;
   return (
     <div className="feature-item">

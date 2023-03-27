@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 import { UserPropTypes } from "./propTypes";
 
+interface Props {
+  firstName: string,
+  /** handler to disconnect user from the application */
+  disconnect: () => void
+}
+
 /**
  * User version of navbar menu
- * 
- * @param {Object} props
- * @param {string} props.firstName
- * @param {function()} props.disconnect handler to disconnect user from the application
- * @returns {JSX.Element}
  */
 
-const User = ({ firstName, disconnect }) => {
+const User = ({ firstName, disconnect }: Props) => {
   return (
     <div>
       <Link className="main-nav-item" to="/profile">

@@ -1,21 +1,24 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../../hooks";
 import Accounts from "../../Components/Accounts/Accounts";
 import { accountsData } from "./accountsData";
 import { editProfileMiddleware } from "../../middlewares";
 import ProfileForm from "../../Components/ProfileForm/ProfileForm";
 import { actions } from "../../reducers/profile/profile";
 
+export interface ProfileEditPayload {
+  firstName: string,
+  lastName: string
+}
+
 /**
  * Profile page
- * 
- * @returns {JSX.Element}
  */
 
 const Profile = () => {
-  const dispatch = useDispatch();
-  const firstName = useSelector(({ profile }) => profile.firstName);
-  const lastName = useSelector(({ profile }) => profile.lastName);
+  const dispatch = useAppDispatch();
+  const firstName = useAppSelector(({ profile }) => profile.firstName);
+  const lastName = useAppSelector(({ profile }) => profile.lastName);
   const [displayEditForm, setDisplayEditForm] = useState(false);
 
   /**
@@ -43,8 +46,8 @@ const Profile = () => {
    * @param {Object} data form body to use as middleware payload
    */
 
-  async function editFormHandler(data) {
-    const succeed = await dispatch(editProfileMiddleware(data));
+  async function editFormHandler(data: ProfileEditPayload) {
+    const succeed = await dispatch<true | void>(editProfileMiddleware(data));
     if (succeed) {
       setDisplayEditForm(false);
     }

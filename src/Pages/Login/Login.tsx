@@ -1,28 +1,31 @@
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { AuthForm } from "../../Components";
 import { authMiddleware } from "../../middlewares";
 
+export interface AuthPayload {
+  email: string,
+  password: string,
+  /** decide to store token on local or session storage */
+  remember: boolean
+}
+
 /**
  * Login page
- * 
- * @returns {JSX.Element}
  */
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const authenticated = useSelector(({ profile }) => profile.authenticated);
+  const authenticated = useAppSelector(({ profile }) => profile.authenticated);
 
   /**
    * Handler to dispatch retrieved form data to {@link authMiddleware}
-   * 
-   * @param {Object} data form body to use as middleware payload
    */
 
-  function loginFormHandler(data) {
+  function loginFormHandler(data: AuthPayload) {
     dispatch(authMiddleware(data));
   }
 

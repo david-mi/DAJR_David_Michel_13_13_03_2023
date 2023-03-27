@@ -1,15 +1,21 @@
 import Account from "./Account/Account";
 import { AccountsPropTypes } from "./propTypes";
 
+export interface Account {
+  title: string,
+  amount: string,
+  description: string
+}
+
+interface Props {
+  accounts: Account[]
+}
+
 /**
  * Display each account
- * 
- * @param {Object} props
- * @param {Array<Object>} props.accounts
- * @returns {JSX.Element}
  */
 
-const Accounts = ({ accounts }) => {
+const Accounts = ({ accounts }: Props) => {
   return (
     <>
       <h2 className="sr-only">Accounts</h2>

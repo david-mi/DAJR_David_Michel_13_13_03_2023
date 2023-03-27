@@ -1,19 +1,25 @@
-import { useSelector, useDispatch } from "react-redux";
 import { Logo, User, Guest } from "./index";
 import { disconnectMiddleware } from "../../middlewares/disconnect";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+
+export interface Props {
+  image: {
+    src: string
+    alt: string
+  }
+  title: string
+}
 
 /**
  * Main Navbar
  * Display {@link User} menu if authenticated or {@link Guest}
  * 
- * @param {Object} Props 
- * @returns {JSX.Element}
  */
 
-const Nav = (props) => {
-  const dispatch = useDispatch();
-  const authenticated = useSelector(({ profile }) => profile.authenticated);
-  const firstName = useSelector(({ profile }) => profile.firstName);
+const Nav = (props: Props) => {
+  const dispatch = useAppDispatch();
+  const authenticated = useAppSelector(({ profile }) => profile.authenticated);
+  const firstName = useAppSelector(({ profile }) => profile.firstName);
 
   function handleDisconnect() {
     dispatch(disconnectMiddleware);

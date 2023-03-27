@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { fetchStatus } from "../enums";
 import Loading from "../Pages/Loading/Loading";
+import { useAppSelector } from "../hooks";
 
 /**
  * Handling private routes
@@ -13,8 +13,8 @@ import Loading from "../Pages/Loading/Loading";
  */
 
 const PrivateRoutes = () => {
-  const retreiveProfileStatus = useSelector((({ profile }) => profile.get.status));
-  const authenticated = useSelector(({ profile }) => profile.authenticated);
+  const retreiveProfileStatus = useAppSelector((({ profile }) => profile.get.status));
+  const authenticated = useAppSelector(({ profile }) => profile.authenticated);
 
   switch (true) {
     case retreiveProfileStatus === fetchStatus.PENDING:

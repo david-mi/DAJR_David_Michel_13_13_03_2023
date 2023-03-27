@@ -1,27 +1,31 @@
-import React, { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useState, useRef } from "react";
+import { useAppSelector } from "../../hooks";
 import Loader from "../Loader/Loader";
 import { fetchStatus } from "../../enums";
 import styles from "./profileForm.module.css";
 import { ProfileFormPropTypes } from "./propTypes";
+import type { ProfileEditPayload } from "../../Pages/Profile/Profile";
+
+
+interface Props {
+  firstName: string
+  lastName: string
+  /** handler to close form */
+  closeForm: () => void
+  /** handler to dispatch information to the store */
+  submitHandler: (data: ProfileEditPayload) => void
+}
 
 /**
  * Profile modification form
- * 
- * @param {Object} props
- * @param {function(Object)} props.submitHandler handler to dispatch information to the store
- * @param {function()} props.closeForm handler to close form
- * @param {string} props.firstName
- * @param {string} props.lastName
- * @returns {JSX.Element}
  */
 
-const ProfileForm = (props) => {
+const ProfileForm = (props: Props) => {
   const { firstName, lastName, closeForm, submitHandler } = props;
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
-  const { status, error } = useSelector(({ profile }) => profile.edit);
-  const [validationError, setValidationError] = useState(null);
+  const firstNameRef = useRef<null | HTMLInputElement>(null);
+  const lastNameRef = useRef<null | HTMLInputElement>(null);
+  const { status, error } = useAppSelector(({ profile }) => profile.edit);
+  const [validationError, setValidationError] = useState<null | string>(null);
   const isSendingRequest = status === fetchStatus.PENDING;
   const hasError = error || validationError;
 
@@ -39,36 +43,30 @@ const ProfileForm = (props) => {
    * - if reportValidity returns true on the form, calls {@link submitHandler}
    * passing {@link formBody} as parameter
    * - if data didn't change, set an error and prevent submitting
-   * 
-   * @param {React.FormEvent} event 
    */
 
-  function submitForm(event) {
+  function submitForm(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
     const formBody = {
-      firstName: firstNameRef.current.value.trim(),
-      lastName: lastNameRef.current.value.trim()
+      firstName: firstNameRef.current!.value.trim(),
+      lastName: lastNameRef.current!.value.trim()
     };
 
     if (isDataUnchanged(formBody.firstName, formBody.lastName)) {
       return setValidationError("Les informations sont identiques");
     }
 
-    if (event.target.reportValidity()) {
+    if ((event.target as HTMLFormElement).reportValidity()) {
       submitHandler(formBody);
     }
   }
 
   /**
    * Verify if firstName and lastName didn't change on form submit
-   * 
-   * @param {string} firstNameUpdate 
-   * @param {string} lastNameUpdate 
-   * @returns {boolean}
    */
 
-  function isDataUnchanged(firstNameUpdate, lastNameUpdate) {
+  function isDataUnchanged(firstNameUpdate: string, lastNameUpdate: string): boolean {
     return firstNameUpdate === firstName && lastNameUpdate === lastName;
   }
 

@@ -1,16 +1,24 @@
-import React from 'react';
 import Feature from "./Feature/Feature";
 import { FeaturesPropTypes } from "./propTypes";
 
+export interface Feature {
+  title: string,
+  text: string,
+  image: {
+    src: string,
+    alt: string
+  }
+}
+
+interface Props {
+  features: Feature[]
+}
+
 /**
  * Show features for Home page
- * 
- * @param {object} props
- * @param {Array<object>} props.features  
- * @returns {JSX.Element}
  */
 
-const Features = ({ features }) => {
+const Features = ({ features }: Props) => {
   return (
     <section className="features">
       <h2 className="sr-only">Features</h2>

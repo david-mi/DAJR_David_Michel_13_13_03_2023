@@ -1,7 +1,7 @@
 import { userModeling } from "./Modeling";
 import type { ProfileEditPayload } from "../../Pages/Profile/Profile";
 import type { AuthPayload } from "../../Pages/Login/Login";
-import { AuthResponse, GetProfileResponse, EditProfileResponse } from "./types";
+import { AuthResponse, ProfileResponse } from "./types";
 import { FetchError } from "../../CustomErrors";
 
 /**
@@ -41,7 +41,7 @@ class User {
    * @throws {Error} if request failed
    */
 
-  async login(payload: Omit<AuthPayload, "remember">): Promise<string> | never {
+  async login(payload: Omit<AuthPayload, "remember">) {
     const options = {
       method: "POST",
       headers: {
@@ -69,7 +69,7 @@ class User {
         Authorization: `Bearer ${token}`
       },
     };
-    const data = await this.fetchOrThrow<GetProfileResponse>("profile", options);
+    const data = await this.fetchOrThrow<ProfileResponse>("profile", options);
     return userModeling.profile(data);
   }
 
@@ -92,7 +92,7 @@ class User {
       },
       body: JSON.stringify(payload)
     };
-    const data = await this.fetchOrThrow<EditProfileResponse>("profile", options);
+    const data = await this.fetchOrThrow<ProfileResponse>("profile", options);
     return userModeling.editProfile(data);
   }
 }

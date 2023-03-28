@@ -1,5 +1,5 @@
 import { MissingTokenError } from "../../CustomErrors"
-import type { AuthResponse, GetProfileResponse, EditProfileResponse } from "./types";
+import type { AuthResponse, ProfileResponse } from "./types";
 
 /**
  * Data modeling class for user
@@ -26,7 +26,7 @@ class UserModeling {
    * @returns user identity
    */
 
-  profile({ body }: GetProfileResponse) {
+  profile({ body }: ProfileResponse) {
     return {
       firstName: body.firstName || "",
       lastName: body.lastName || ""
@@ -39,7 +39,7 @@ class UserModeling {
    * @returns user updated identity
    */
 
-  editProfile({ body }: EditProfileResponse) {
+  editProfile({ body }: ProfileResponse) {
     return {
       firstName: body.firstName || "",
       lastName: body.lastName || ""

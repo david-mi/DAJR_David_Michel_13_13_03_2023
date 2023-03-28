@@ -7,21 +7,15 @@ export interface AuthResponse {
   }
 }
 
-export interface GetProfileResponse {
+export interface ProfileResponse {
   status: 200,
   message: string,
   body: {
     id: string,
     email: string,
     firstName: string,
-    lastName: string
-  }
-}
-
-export interface EditProfileResponse {
-  status: 201,
-  body: {
-    firstName: string,
-    lastName: string
+    lastName: string,
+    createdAt: string,
+    updatedAt: string
   }
 }

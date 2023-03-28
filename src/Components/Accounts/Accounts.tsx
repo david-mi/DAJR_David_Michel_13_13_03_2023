@@ -1,14 +1,14 @@
 import Account from "./Account/Account";
 import { AccountsPropTypes } from "./propTypes";
 
-export interface Account {
+export interface AccountType {
   title: string,
   amount: string,
   description: string
 }
 
 interface Props {
-  accounts: Account[]
+  accounts: AccountType[]
 }
 
 /**

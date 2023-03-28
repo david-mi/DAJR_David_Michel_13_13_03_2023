@@ -1,11 +1,11 @@
 import { AccountPropTypes } from "./propTypes";
-import type { Account as Props } from "../Accounts";
+import type { AccountType } from "../Accounts";
 
 /**
  * Account component
  */
 
-const Account = ({ title, amount, description }: Props) => {
+const Account = ({ title, amount, description }: AccountType) => {
   return (
     <section className="account">
       <div className="account-content-wrapper">

@@ -1,7 +1,7 @@
 import Feature from "./Feature/Feature";
 import { FeaturesPropTypes } from "./propTypes";
 
-export interface Feature {
+export interface FeatureType {
   title: string,
   text: string,
   image: {
@@ -11,7 +11,7 @@ export interface Feature {
 }
 
 interface Props {
-  features: Feature[]
+  features: FeatureType[]
 }
 
 /**

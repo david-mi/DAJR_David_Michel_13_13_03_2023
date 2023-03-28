@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef } from "react";
+import React, { useRef } from "react";
 import styles from "./authForm.module.css";
 import Loader from "../Loader/Loader";
 import { useAppSelector } from "../../hooks";

@@ -1,11 +1,11 @@
 import { FeaturePropTypes } from "./propTypes";
-import type { Feature as Props } from "../Features";
+import type { FeatureType } from "../Features";
 
 /**
  * Show feature, containing a title, text and image as logo
  */
 
-const Feature = ({ title, text, image }: Props) => {
+const Feature = ({ title, text, image }: FeatureType) => {
   const { src, alt } = image;
   return (
     <div className="feature-item">

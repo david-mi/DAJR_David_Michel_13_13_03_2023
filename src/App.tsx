@@ -22,7 +22,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Nav
-        image={{ src: "./argentBankLogo.png", alt: "Argent Bank Logo" }}
+        image={{ src: "/argentBankLogo.png", alt: "Argent Bank Logo" }}
         title="Argent Bank"
       />
       <Routes />
